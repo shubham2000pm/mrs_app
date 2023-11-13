@@ -27,7 +27,7 @@ def recommend(movie):
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/mrs_app")
 def home():
     return render_template("index.html")
 
