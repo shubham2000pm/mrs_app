@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movie Recommendation System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      /* Define a CSS class to style the text */
+      .bold-and-stylish {
+        margin-left: 0.75rem;
+        font-size:1.25rem;
+        font-weight: 500;
+        color: black; /* Change the color to your desired color code */
+      }
+    </style>
+  
+  
+  </head>
+  <body class="bg-gray-200">
+    <header class="text-gray-600 body-font -my-10">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+          <img class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <a href="/" ><img src="../static/logo.png" width="40" 
+              height="50" ></a>
+              
+            
+              <a href="/" ><span class="bold-and-stylish">Movie Recommendation System</span></a>
+          </a>
+          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+            <a href = "/" class="mr-5 hover:text-gray-900">Home</a>
+            <a href = "/about" class="mr-5 hover:text-gray-900">About</a>
+            <a href = "/contact" class="mr-5 hover:text-gray-900">Contact Us</a>
+            <a href = "/recommendation" class="mr-5 text-center block border border-gray-300 rounded py-2 px-4 bg-blue-500 hover:bg-gray-400 text-white hover:shadow-md transition duration-300">Recommendation</a>
+          </nav>
+          
+        </div>
+      </header>  
+
+      <section class="text-gray-600 body-font -my-8">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-col text-center w-full mb-12">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Movie Recommendation System</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Choose any Movie to get their best Recommendations.</p>
+            <br>
+          <p class="text-primary"><b>{{error}}</b></p>
+          
+          <div class="row text-center">
+            <div class="col-md-3"></div>
+            <div class="center col-md-6">
+              <form action="/recommendation" method="POST">
+                <select class="form-select" id="movies" name="movies" aria-label="Default select example">
+                  
+                  {% for j in movie_list %}
+                  <option value="{{j}}">{{j}}</option>
+                  {% endfor %}
+                  
+                </select><br>
+                <div class="text-center">
+                  <button type="submit" class="btn bg-blue-200 hover:bg-purple-300 transform hover:scale-105 transition-transform duration-300">Recommend</button>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {% if status == True %}
+      <section class="text-gray-600 body-font"  style="margin-top: -180px;">
+        <div class="container px-5 py-24 mx-auto">
+          
+            <h2 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Recommended Movies Similar To {{selected_movie}} </h2>
+          
+          <div class="flex flex-wrap -m-4">
+            <div class="xl:w-1/4 md:w-1/2 p-3">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{poster[0]}}" alt="content">
+                <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Movie Name</h3>
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[0]}}</h2>
+              </div>
+            </div>
+
+            <div class="xl:w-1/4 md:w-1/2 p-3">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{poster[1]}}" alt="content">
+                <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Movie Name</h3>
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[1]}}</h2>
+              </div>
+            </div>
+
+            <div class="xl:w-1/4 md:w-1/2 p-3">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{poster[2]}}" alt="content">
+                <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Movie Name</h3>
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[2]}}</h2>
+              </div>
+            </div>
+
+            <div class="xl:w-1/4 md:w-1/2 p-3">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{poster[3]}}" alt="content">
+                <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Movie Name</h3>
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{movies_name[3]}}</h2>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+      {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
